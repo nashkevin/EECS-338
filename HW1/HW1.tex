@@ -1,0 +1,109 @@
+\documentclass[letterpaper]{article}
+
+% used for unnumbered equations
+\usepackage{amsmath}
+% used for enumerating problem parts by letter
+\usepackage{enumerate}
+% used for margins
+\usepackage[letterpaper,left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}
+% used for header and page numbers
+\usepackage{fancyhdr}
+% used for preventing paragraph indentation
+\usepackage[parfill]{parskip}
+% used for section formatting as problem
+\usepackage[explicit]{titlesec}
+% used for subsection indentation
+\usepackage{changepage}
+
+\pagestyle{fancy}
+\fancyfoot{}
+% header/footer settings
+\lhead{Kevin Nash (kjn33)}
+\chead{EECS 338 -- Homework 1}
+\rhead{\today}
+\cfoot{\thepage}
+
+\titleformat{\section}{\normalfont\large\bfseries}{}{0em}{#1\ \thesection}
+\newenvironment{shift}
+    {\adjustwidth{3em}{0pt}}
+    {\endadjustwidth}
+
+\begin{document}
+
+Note: All programs were compiled and run on the eecslinab3 server.
+My connection was established via the Bitvise SSH client on a Windows 8.1
+system.
+
+\section{Question}
+
+The \texttt{while} and \texttt{for} programs monopolized CPU usage,
+with 98\% combined (split evenly). The other two programs, \texttt{input} and
+\texttt{sleep} used only a negligible (0.0\%) share of the CPU.
+
+The raw output is shown below.
+
+\begin{verbatim}
+ CPU[||||||||||||||||||||||||||||||100.0%]     Tasks: 140, 112 thr; 3 running
+ Mem[||||||||||||||||||||||||||349/1001MB]     Load average: 2.17 1.55 2.13
+ Swp[|                           2/1021MB]     Uptime: 6 days, 04:45:41
+
+ PID USER      PRI  NI  VIRT   RES   SHR S CPU% MEM%   TIME+  Command
+7988 kjn33      20   0  2004   280   224 R 49.0  0.0  0:08.58 ./while
+7986 kjn33      20   0  2004   276   224 R 49.0  0.0  0:12.16 ./for
+7989 kjn33      20   0  4052  2264  1276 R  0.0  0.2  0:00.10 htop -u kjn33
+6974 kjn33      20   0  9476  2028  1368 S  0.0  0.2  0:00.05 sshd: kjn33@pts/0
+6977 kjn33      20   0  8600  6896  1560 S  0.0  0.7  0:00.23 -bash
+7106 kjn33      20   0  2008   276   224 T  0.0  0.0  0:00.00 ./input
+7987 kjn33      20   0  2004   276   224 S  0.0  0.0  0:00.00 ./sleep
+\end{verbatim}
+
+\section{Question}
+
+This time the \texttt{while} and \texttt{for} programs each used only 4-5\%
+of the CPU, or $\sim$20\% total. This was a decrease from running only one
+of each instance as in the first question. The decrease in total CPU usage
+was due to an increase in the number of users sharing the system: in the
+time between tests, three or four more users were busy completing this
+homework.
+
+The raw output is shown below.
+
+\begin{verbatim}
+ CPU[||||||||||||||||||||||||||||||100.0%]     Tasks: 153, 112 thr; 11 running
+ Mem[||||||||||||||||||||||||||362/1001MB]     Load average: 6.24 3.20 2.33
+ Swp[|                           2/1021MB]     Uptime: 6 days, 04:58:13
+
+ PID USER      PRI  NI  VIRT   RES   SHR S CPU% MEM%   TIME+  Command
+9636 kjn33      20   0  2004   276   224 R  5.0  0.0  0:01.07 ./while
+9635 kjn33      20   0  2004   276   224 R  5.0  0.0  0:01.14 ./while
+9633 kjn33      20   0  2004   276   224 R  5.0  0.0  0:01.73 ./for
+9634 kjn33      20   0  2004   276   224 R  4.0  0.0  0:01.56 ./for
+9637 kjn33      20   0  3720  1940  1284 R  0.0  0.2  0:00.11 htop -u kjn33
+6974 kjn33      20   0  9476  2028  1368 S  0.0  0.2  0:00.13 sshd: kjn33@pts/0
+6977 kjn33      20   0  8600  6896  1560 S  0.0  0.7  0:00.23 -bash
+\end{verbatim}
+\newpage
+
+\section{Question}
+
+Contrary to my expectations, the server terminated my running programs when
+I closed the terminal window, even though I kept my connection to the server
+open (logged on). One possible explanation is that the instantiated programs
+are children of the \texttt{bash} process from which the command originated,
+or tied to it in some other way, and by closing the terminal window,
+the programs are identified as unneccesary and subsequently terminated.
+
+The raw output is shown below.
+
+\begin{verbatim}
+  CPU[||||||||||||||||||||||||||||||100.0%]     Tasks: 157, 112 thr; 6 running
+  Mem[||||||||||||||||||||||||||379/1001MB]     Load average: 4.46 3.66 3.33
+  Swp[|                           2/1021MB]     Uptime: 6 days, 05:15:37
+
+  PID USER      PRI  NI  VIRT   RES   SHR S CPU% MEM%   TIME+  Command
+11603 kjn33      20   0  4112  2352  1288 R  1.0  0.2  0:01.38 htop -u kjn33
+ 6974 kjn33      20   0  9476  2028  1368 S  0.0  0.2  0:00.17 sshd: kjn33@pts/0
+11495 kjn33      20   0  8600  6796  1460 S  0.0  0.7  0:00.23 -bash
+\end{verbatim}
+
+\end{document}
