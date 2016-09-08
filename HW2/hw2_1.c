@@ -1,25 +1,24 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/* This process creates two children
+ * The parent and its children print their pids and their parent's pids
+ */
 int main()
 {
     pid_t pid;
 
     pid = fork();
-    if (pid == 0) { // is the child
+    if (pid == 0) // is the child
         printf("Process 2 = %d, parent = %d.\n", getpid(), getppid());
-    }
     else if (pid > 0) { // is the parent
         printf("Process 1 = %d, parent = %d.\n", getpid(), getppid());
         wait();
         pid = fork();
-        if (pid > 0) {
-            // do nothing
+        if (pid > 0)
             wait();
-        }
-        else if (pid == 0) {
+        else if (pid == 0)
             printf("Process 3 = %d, parent = %d.\n", getpid(), getppid());
-        }
     }
-	return 0;
+    return 0;
 }
