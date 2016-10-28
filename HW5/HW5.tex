@@ -1,0 +1,75 @@
+\documentclass[letterpaper]{article}
+
+% used for enumerating problem parts by letter
+\usepackage{enumerate}
+% used for margins
+\usepackage[letterpaper,left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}
+% used for header and page numbers
+\usepackage{fancyhdr}
+% used for preventing paragraph indentation
+\usepackage[parfill]{parskip}
+
+\pagestyle{fancy}
+\fancyfoot{}
+% header/footer settings
+\lhead{Kevin Nash (kjn33)}
+\chead{EECS 338 -- Homework 5}
+\rhead{\today}
+
+\begin{document}
+I included output from all programs, just to be safe.
+\begin{enumerate}
+    \item \textbf{Output}
+    \begin{verbatim}
+{ HW5 }  > ./hw5_1
+Thread #1, i = 3
+Thread #1, i = 4
+Thread #2, i = 5
+Thread #2, i = 6
+Thread #3, i = 7
+Thread #3, i = 8
+Thread #0, i = 0
+Number of threads = 4
+Thread #0, i = 1
+Thread #0, i = 2
+Global min = -97.27
+    \end{verbatim}
+    \item \textbf{Output}
+    \begin{verbatim}
+{ HW5 }  > ./hw5_2
+Thread #1, i = 3
+Thread #1, i = 4
+Thread #2, i = 5
+Thread #3, i = 7
+Thread #3, i = 8
+Thread #2, i = 6
+Thread #0, i = 0
+Number of threads = 4
+Thread #0, i = 1
+Thread #0, i = 2
+Global min = -97.27
+    \end{verbatim}
+    \item \textbf{Output}
+    \begin{verbatim}
+{ HW5 }  > ./hw5_3
+parent counter = 100000000
+child counter = -100000000
+global counter = 3884872
+{ HW5 }  > ./hw5_3
+parent counter = 100000000
+child counter = -100000000
+global counter = -859907
+    \end{verbatim}
+    \item \textbf{Output}
+    \begin{verbatim}
+{ HW5 }  > ./hw5_4
+parent counter = 100000000
+child counter = -100000000
+global counter = -77270006
+{ HW5 }  > ./hw5_4
+parent counter = 100000000
+child counter = -100000000
+global counter = -81086031
+    \end{verbatim}
+\end{enumerate}
+\end{document}
