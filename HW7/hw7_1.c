@@ -6,6 +6,7 @@
 /* this data is shared by the thread(s) */
 int buffer[BUFFER_SIZE];
 int values[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+int N = sizeof values / sizeof *values;
 
 void *producer(); /* the thread */
 void *consumer(); /* the thread */
@@ -28,7 +29,7 @@ int main(int argc, char *argv[]) {
 
 void *producer() {
     int i;
-    for (i = 0; i < sizeof values / sizeof *values; i++) {
+    for (i = 0; i < N; i++) {
         buffer[i % BUFFER_SIZE] = values[i];
     }
     pthread_exit(0);
@@ -36,8 +37,9 @@ void *producer() {
 
 void *consumer() {
     int i;
-    for (i = 0; i < BUFFER_SIZE; i++) {
-        printf("%d\n", buffer[i]);
+    for (i = 0; i < N; i++) {
+        printf("buffer[%d] = %d\n", i % BUFFER_SIZE, buffer[i % BUFFER_SIZE]);
+        buffer[i % N] = 0;
     }
     pthread_exit(0);
 }
