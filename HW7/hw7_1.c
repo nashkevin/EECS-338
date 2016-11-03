@@ -38,7 +38,7 @@ void *producer() {
 void *consumer() {
     int i;
     for (i = 0; i < N; i++) {
-        printf("buffer[%d] = %d\n", i % BUFFER_SIZE, buffer[i % BUFFER_SIZE]);
+        printf("%d\n", buffer[i % BUFFER_SIZE]);
         buffer[i % N] = 0;
     }
     pthread_exit(0);
